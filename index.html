@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quem Sou Eu? FC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07110c;--panel:#0d1d15;--panel2:#10251a;--line:#224332;
+  --green:#00df7a;--green2:#0baa66;--text:#f4fff8;--muted:#90a99b;
+  --bad:#303b35;--gold:#f5c451;--red:#ff5a66;--shadow:0 20px 60px rgba(0,0,0,.34)
+}
+*{box-sizing:border-box} body{margin:0;background:
+radial-gradient(circle at 20% 0%,rgba(0,223,122,.12),transparent 34%),
+radial-gradient(circle at 100% 30%,rgba(30,120,255,.08),transparent 27%),
+var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;min-height:100vh}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 18px 60px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:25px}
+.brand{display:flex;align-items:center;gap:12px}.ball{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#00f08a,#00a45f);display:grid;place-items:center;font-size:25px;box-shadow:0 10px 30px rgba(0,223,122,.22)}
+h1{font-size:20px;margin:0;font-weight:900;letter-spacing:-.03em}.sub{font-size:12px;color:var(--muted);margin-top:3px}
+.streak{border:1px solid var(--line);background:rgba(13,29,21,.85);padding:10px 14px;border-radius:14px;font-size:13px}
+.modebar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 24px}
+.mode{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:14px;padding:13px;font-weight:800;cursor:pointer;transition:.2s}
+.mode:hover{transform:translateY(-1px);border-color:#37644c}.mode.active{background:linear-gradient(135deg,#0c8b51,#00c970);color:white;border-color:transparent;box-shadow:0 8px 25px rgba(0,223,122,.15)}
+.hero{background:linear-gradient(180deg,rgba(14,32,22,.96),rgba(10,23,16,.96));border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow)}
+.heroTop{display:flex;justify-content:space-between;align-items:start;gap:20px}.mystery{display:flex;gap:16px;align-items:center}.avatar{width:74px;height:74px;border-radius:20px;background:linear-gradient(145deg,#173524,#0b1a12);border:1px solid #2b563e;display:grid;place-items:center;font-size:34px;font-weight:900;color:#62a97e}
+.title{font-size:27px;font-weight:900;letter-spacing:-.04em;margin:0 0 5px}.hint{color:var(--muted);font-size:13px;line-height:1.45}.tries{text-align:right}.tries b{font-size:24px}.tries span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.searchBox{position:relative;margin-top:24px;display:flex;gap:10px}.search{flex:1;background:#08140e;border:1px solid #31523f;color:#fff;border-radius:14px;padding:15px 16px;font-size:15px;outline:none}.search:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,223,122,.09)}
+.guessBtn{border:0;border-radius:14px;padding:0 22px;background:var(--green);font-weight:900;color:#042113;cursor:pointer}.guessBtn:disabled{opacity:.45;cursor:not-allowed}
+.suggestions{position:absolute;left:0;right:112px;top:57px;background:#0c1c14;border:1px solid #2a513b;border-radius:14px;overflow:hidden;z-index:20;box-shadow:var(--shadow);display:none;max-height:290px;overflow-y:auto}
+.sug{padding:12px 14px;display:flex;justify-content:space-between;gap:12px;cursor:pointer;border-bottom:1px solid #183324}.sug:hover{background:#12301f}.sug:last-child{border-bottom:0}.sug b{font-size:14px}.sug small{color:var(--muted)}
+.legend{display:flex;gap:13px;flex-wrap:wrap;margin:16px 0 0;font-size:11px;color:var(--muted)}.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px}.ok{background:var(--green)}.no{background:#66746d}
+.board{margin-top:18px;overflow:auto;border:1px solid var(--line);border-radius:20px;background:rgba(9,22,15,.72)}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:790px}th{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#7f9a8a;padding:13px 8px;text-align:center;border-bottom:1px solid var(--line)}th:first-child{text-align:left;padding-left:14px}
+td{padding:7px;border-bottom:1px solid #173324;text-align:center}.row:last-child td{border-bottom:0}.pname{text-align:left;font-weight:800;font-size:13px;padding-left:14px;white-space:nowrap}
+.cell{min-height:54px;border-radius:11px;background:var(--bad);display:grid;place-items:center;padding:7px;font-size:12px;font-weight:800;position:relative}.cell.good{background:linear-gradient(145deg,#00a95f,#06ca73);color:#fff}.cell .arrow{position:absolute;right:5px;top:3px;font-size:12px;color:#fff}.empty{padding:38px 20px;text-align:center;color:#70887b;font-size:13px}
+.foot{display:flex;justify-content:space-between;gap:15px;color:#6e8779;font-size:11px;margin-top:14px;padding:0 4px}.new{background:transparent;color:#b5c8bd;border:1px solid #294a38;border-radius:10px;padding:8px 11px;cursor:pointer;font-weight:700}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.67);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal{width:min(480px,100%);background:#0d1f16;border:1px solid #2c5a40;border-radius:24px;padding:28px;text-align:center;box-shadow:var(--shadow)}.reveal{width:96px;height:96px;margin:0 auto 14px;border-radius:28px;background:linear-gradient(145deg,#153827,#0a1d13);display:grid;place-items:center;font-size:42px;border:1px solid #32704d}.modal h2{font-size:30px;margin:0 0 8px}.modal p{color:var(--muted);line-height:1.5}.actions{display:flex;gap:9px;margin-top:20px}.actions button{flex:1;padding:13px;border-radius:13px;border:0;font-weight:900;cursor:pointer}.primary{background:var(--green);color:#042113}.secondary{background:#172d21;color:white}
+.badge{display:inline-flex;margin-top:10px;background:#173525;border:1px solid #2e6044;padding:8px 11px;border-radius:999px;color:#aeeac7;font-size:12px;font-weight:800}
+@media(max-width:680px){.wrap{padding:16px 10px 40px}.top{align-items:flex-start}.streak{font-size:11px}.modebar{gap:6px}.mode{padding:11px 5px;font-size:12px}.hero{padding:16px;border-radius:19px}.heroTop{flex-direction:column}.tries{text-align:left}.avatar{width:62px;height:62px}.title{font-size:22px}.searchBox{display:grid;grid-template-columns:1fr}.guessBtn{height:48px}.suggestions{right:0;top:56px}.foot{flex-direction:column}.board{border-radius:15px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><div class="ball">⚽</div><div><h1>Quem Sou Eu? FC</h1><div class="sub">Descubra o jogador em até 8 tentativas.</div></div></div>
+    <div class="streak">🔥 Sequência: <b id="streak">0</b></div>
+  </div>
+
+  <div class="modebar">
+    <button class="mode active" data-mode="europa">🇪🇺 Europa</button>
+    <button class="mode" data-mode="brasileirao">🇧🇷 Brasileirão</button>
+    <button class="mode" data-mode="lendas">🏆 Lendas</button>
+  </div>
+
+  <section class="hero">
+    <div class="heroTop">
+      <div class="mystery"><div class="avatar">?</div><div><h2 class="title">Jogador misterioso</h2><div class="hint" id="modeHint">Principais jogadores das 5 grandes ligas europeias.</div></div></div>
+      <div class="tries"><b><span id="tryNow" style="display:inline;color:white;font-size:24px">0</span>/8</b><span>TENTATIVAS USADAS</span></div>
+    </div>
+    <div class="searchBox">
+      <input id="search" class="search" autocomplete="off" placeholder="Digite o nome de um jogador...">
+      <button id="guessBtn" class="guessBtn" disabled>CHUTAR</button>
+      <div id="suggestions" class="suggestions"></div>
+    </div>
+    <div class="legend"><span><i class="dot ok"></i>Correto</span><span><i class="dot no"></i>Incorreto</span><span>↑ valor do jogador secreto é maior</span><span>↓ menor</span></div>
+  </section>
+
+  <div class="board">
+    <table>
+      <thead><tr><th>Jogador</th><th>NAC</th><th>LIGA</th><th>CLUBE</th><th>POS</th><th id="ageHead">IDADE</th><th>#</th></tr></thead>
+      <tbody id="tbody"><tr><td colspan="7" class="empty">Faça seu primeiro chute para começar.</td></tr></tbody>
+    </table>
+  </div>
+  <div class="foot">
+    <span id="poolInfo"></span>
+    <button class="new" id="newBtn">↻ Novo jogador</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="reveal" id="resultIcon">⚽</div>
+    <h2 id="resultTitle"></h2>
+    <p id="resultText"></p>
+    <div class="badge" id="resultBadge"></div>
+    <div class="actions"><button class="secondary" id="closeResult">Ver tentativas</button><button class="primary" id="playAgain">Próximo jogador</button></div>
+  </div>
+</div>
+
+<script>
+let players=[], mode='europa', secret=null, selected=null, guesses=[], ended=false;
+const qs=s=>document.querySelector(s), qsa=s=>[...document.querySelectorAll(s)];
+const modeNames={europa:'Europa',brasileirao:'Brasileirão',lendas:'Lendas'};
+const hints={
+ europa:'Principais jogadores das 5 grandes ligas europeias.',
+ brasileirao:'Grandes nomes atuais, históricos e aposentados do Brasileirão.',
+ lendas:'ÍDOLOS e grandes lendas do futebol mundial.'
+};
+const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+function pool(){return players.filter(p=>p.mode===mode)}
+function fmt(v){return (v===null||v===undefined||v==='')?'—':v}
+function newGame(){
+ const list=pool(); const last=localStorage.getItem('qsefc_last_'+mode);
+ let options=list.filter(x=>x.name!==last); secret=options[Math.floor(Math.random()*options.length)]||list[0];
+ localStorage.setItem('qsefc_last_'+mode,secret.name); guesses=[]; selected=null; ended=false;
+ qs('#tryNow').textContent=0; qs('#search').value=''; qs('#guessBtn').disabled=true;
+ qs('#suggestions').style.display='none'; render(); qs('#poolInfo').textContent=`${list.length} jogadores neste modo • Base BETA 22/09/2026`;
+ qs('#ageHead').textContent=mode==='lendas'?'NASC':'IDADE';
+}
+function setMode(m){
+ mode=m; qsa('.mode').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));
+ qs('#modeHint').textContent=hints[m]; newGame();
+}
+qsa('.mode').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+function suggest(){
+ const val=norm(qs('#search').value.trim()); selected=null; qs('#guessBtn').disabled=true;
+ const box=qs('#suggestions'); if(!val){box.style.display='none';return}
+ const guessed=new Set(guesses.map(g=>g.name));
+ let arr=pool().filter(p=>!guessed.has(p.name)&&norm(p.name).includes(val)).slice(0,8);
+ if(!arr.length){box.innerHTML='<div class="sug"><small>Nenhum jogador encontrado neste modo.</small></div>';box.style.display='block';return}
+ box.innerHTML=arr.map((p,i)=>`<div class="sug" data-i="${i}"><b>${p.name}</b><small>${p.club} • ${p.position}</small></div>`).join('');
+ [...box.children].forEach((el,i)=>el.onclick=()=>{selected=arr[i];qs('#search').value=selected.name;box.style.display='none';qs('#guessBtn').disabled=false});
+ box.style.display='block';
+}
+qs('#search').addEventListener('input',suggest);
+qs('#search').addEventListener('keydown',e=>{if(e.key==='Enter'&&!qs('#guessBtn').disabled)guess()});
+document.addEventListener('click',e=>{if(!e.target.closest('.searchBox'))qs('#suggestions').style.display='none'});
+function same(a,b){return norm(String(a))===norm(String(b))}
+function displayVal(p,key){ if(key==='age'&&mode==='lendas') return p.birthYear||'—'; return fmt(p[key]);}
+function compCell(g,key){
+ const gv=(key==='age'&&mode==='lendas')?g.birthYear:g[key], sv=(key==='age'&&mode==='lendas')?secret.birthYear:secret[key];
+ const good=same(gv,sv); let arrow='';
+ if(!good && (key==='age'||key==='shirt') && gv!=null && sv!=null) arrow=sv>gv?'↑':'↓';
+ return `<div class="cell ${good?'good':''}">${fmt(gv)}${arrow?`<span class="arrow">${arrow}</span>`:''}</div>`;
+}
+function render(){
+ const tb=qs('#tbody'); if(!guesses.length){tb.innerHTML='<tr><td colspan="7" class="empty">Faça seu primeiro chute para começar.</td></tr>';return}
+ tb.innerHTML=guesses.map(g=>`<tr class="row"><td class="pname">${g.name}</td><td>${compCell(g,'nationality')}</td><td>${compCell(g,'league')}</td><td>${compCell(g,'club')}</td><td>${compCell(g,'position')}</td><td>${compCell(g,'age')}</td><td>${compCell(g,'shirt')}</td></tr>`).join('');
+}
+function guess(){
+ if(!selected||ended)return;
+ guesses.push(selected); qs('#tryNow').textContent=guesses.length; const won=selected.name===secret.name;
+ selected=null; qs('#search').value=''; qs('#guessBtn').disabled=true; render();
+ if(won||guesses.length>=8){ ended=true; showResult(won); }
+}
+qs('#guessBtn').onclick=guess;
+function showResult(won){
+ let streak=Number(localStorage.getItem('qsefc_streak')||0);
+ if(won) streak++; else streak=0; localStorage.setItem('qsefc_streak',streak); qs('#streak').textContent=streak;
+ qs('#resultIcon').textContent=won?'🏆':'⚽';
+ qs('#resultTitle').textContent=won?`Acertou em ${guesses.length}!`:'Fim de jogo';
+ qs('#resultText').innerHTML=won?`O jogador era <b>${secret.name}</b>. Boa leitura das pistas!`:`O jogador era <b>${secret.name}</b> — ${secret.club}, ${secret.position}.`;
+ qs('#resultBadge').textContent=won?`🔥 Sequência: ${streak}`:`Modo ${modeNames[mode]}`;
+ qs('#overlay').style.display='flex';
+}
+qs('#closeResult').onclick=()=>qs('#overlay').style.display='none';
+qs('#playAgain').onclick=()=>{qs('#overlay').style.display='none';newGame()};
+qs('#newBtn').onclick=newGame;
+Promise.all(['europa.json','brasileirao.json','lendas.json'].map(f=>fetch(f).then(r=>{if(!r.ok)throw new Error(f);return r.json()}))).then(groups=>{players=groups.flat();qs('#streak').textContent=localStorage.getItem('qsefc_streak')||0;newGame()})
+.catch(()=>{document.body.innerHTML='<div style="padding:30px;color:white;font-family:sans-serif">Abra este projeto por um servidor local (ex.: Live Server) para carregar o banco players.json.</div>'});
+</script>
+</body></html>
